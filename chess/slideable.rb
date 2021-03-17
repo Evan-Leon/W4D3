@@ -24,9 +24,41 @@ module Slideable
 
     def moves
         final_arr = []
+        self.move_dirs.each do |direction|
 
+        end
 
         final_arr
+    end
+
+    private 
+
+    def grow_unblocked_moves_in_dir(dx, dy)
+        all_moves = []
+        row, col = dx, dy 
+        can_move = true
+        
+        horizontal_dirs.each do |coords|
+            
+            while can_move
+                new_x = row + coords[0]
+                new_y = row + coords[1]
+                new_pos = [new_x, new_y] 
+                if valid_move?(new_pos)    #covers valid move by board 
+                    all_moves << new_pos    # need to cover pieces/colors
+                    
+                else  
+
+                    can_move = false 
+                end
+            end
+        end
+        all_moves
+    end
+
+    def move_dirs
+        #subclass will implement this
+        raise "subclass has not implemented #move_dirs"
     end
 
 end
