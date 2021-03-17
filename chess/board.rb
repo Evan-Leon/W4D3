@@ -51,3 +51,8 @@ class Board
     end
 
 end
+
+if __file__ == $PROGRAM_NAME
+    b = Board.new
+    peace = Piece.new([0,0])
+end 

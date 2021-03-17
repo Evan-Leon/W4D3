@@ -23,34 +23,49 @@ module Slideable
     end
 
     def moves
-        final_arr = []
+        moves = []
         self.move_dirs.each do |direction|
 
+          moves <<grow_unblocked_moves_in_dir(direction[0], direction[1])
         end
-
-        final_arr
+        moves  
     end
 
-    # private 
+    private 
 
     def grow_unblocked_moves_in_dir(dx, dy)
         all_moves = []
-        row, col = dx, dy 
-        can_move = true
-        
-        horizontal_dirs.each do |coords|
-            can_move = true
-            while can_move
-                new_x = row + coords[0]
-                new_y = row + coords[1]
-                new_pos = [new_x, new_y] 
-                if valid_move?(new_pos) && (self[new_pos] == nil || self[new_pos] != self.color) 
-                    all_moves << new_pos
-                else 
-                    can_move = false 
-                end
+        row, col = self.pos[0], self.pos[1] 
+        quu = [[row+dx,col+dy]]
+
+        until quu.empty?
+            current_pos = quu.shift 
+            if valid_move?(current_pos) &&(self[current_pos] == nil || self[current_pos] != self.color)
+                all_moves << current_pos 
+                quu << [current_pos[0]+dx, current_pos[1]+dy]
             end
-        end
+        end      
+        all_moves
+    end
+
+
+
+
+
+        # can_move = true
+        # self.move_dirs.each do |coords|
+        #     can_move = true
+        #     while can_move
+        #         new_x = row + coords[0]
+        #         new_y = row + coords[1]
+        #         new_pos = [new_x, new_y] 
+        #         if valid_move?(new_pos) && (self[new_pos] == nil || self[new_pos] != self.color) 
+        #             all_moves << new_pos
+        #         else 
+        #             can_move = false 
+        #         end
+        #     end
+        # end
 
         all_moves
 
