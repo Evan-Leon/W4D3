@@ -1,14 +1,14 @@
-require_relative "./slideable.rb"
+require_relative "slideable"
 
 class Piece
     include Slideable
 
     attr_reader :color, :board, :pos
 
-    def initialize(pos)        # (color, board, pos)
-        # @color = color
-        # @board = board
-
+    def initialize(color, board, pos)        # (color, board, pos)
+        @color = color
+        @board = board
+        
         #^^need to come back and initialize in board
         @pos = pos    
     end
