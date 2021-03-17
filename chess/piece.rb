@@ -1,5 +1,7 @@
+require_relative "./slideable.rb"
 
 class Piece
+    include Slideable
 
     attr_reader :color, :board, :pos
 
